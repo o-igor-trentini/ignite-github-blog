@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import { DefaultContainer } from './style';
+import { DefaultContainer, DefaultContent } from './style';
 import { Header } from '../Header';
 
 export const Default: FC = () => {
@@ -8,9 +8,9 @@ export const Default: FC = () => {
         <DefaultContainer>
             <Header />
 
-            <div>
+            <DefaultContent>
                 <Outlet />
-            </div>
+            </DefaultContent>
         </DefaultContainer>
     );
 };
