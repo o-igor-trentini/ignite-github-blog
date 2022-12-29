@@ -65,7 +65,9 @@ export const ProfileCard: FC = () => {
 
                         <ProfileDescriptionInfo>
                             <Users weight="fill" />
-                            <Text size="md">{totalFollowars} seguidore(s)</Text>
+                            <Text size="md">{`${totalFollowars} ${
+                                totalFollowars > 0 ? 'seguidores' : 'seguidor'
+                            }`}</Text>
                         </ProfileDescriptionInfo>
                     </ProfileDescriptionInformations>
                 </ProfileDescription>
