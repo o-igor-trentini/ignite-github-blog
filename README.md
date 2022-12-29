@@ -1,1 +1,1 @@
-# ignite-github-blog
+# Ignite GitHub Blog
