@@ -53,20 +53,23 @@ export const ProfileCard: FC = () => {
                     <ProfileDescriptionInformations>
                         <ProfileDescriptionInfo>
                             <GithubLogo weight="fill" />
+
                             <Text size="md">{profile?.login}</Text>
                         </ProfileDescriptionInfo>
 
                         {profile?.company && (
                             <ProfileDescriptionInfo>
                                 <Buildings weight="fill" />
+
                                 <Text size="md">{profile?.company}</Text>
                             </ProfileDescriptionInfo>
                         )}
 
                         <ProfileDescriptionInfo>
                             <Users weight="fill" />
+
                             <Text size="md">{`${totalFollowars} ${
-                                totalFollowars > 0 ? 'seguidores' : 'seguidor'
+                                totalFollowars > 1 ? 'seguidores' : 'seguidor'
                             }`}</Text>
                         </ProfileDescriptionInfo>
                     </ProfileDescriptionInformations>
