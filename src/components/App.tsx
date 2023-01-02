@@ -4,6 +4,7 @@ import { MainStyle } from '../styles/main';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 import { Router } from './Router';
+import { PostsProvider } from '../contexts/Posts';
 
 export const App: FC = () => {
     return (
@@ -11,7 +12,9 @@ export const App: FC = () => {
             <MainStyle />
 
             <BrowserRouter>
-                <Router />
+                <PostsProvider>
+                    <Router />
+                </PostsProvider>
             </BrowserRouter>
         </ThemeProvider>
     );

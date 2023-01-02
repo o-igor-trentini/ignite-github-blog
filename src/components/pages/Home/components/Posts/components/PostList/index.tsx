@@ -5,46 +5,27 @@ import { Title } from '../../../../../../ui/Title';
 import { formatDistanceToNow } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { Text } from '../../../../../../ui/Text';
-
-const posts = [
-    {
-        id: '1',
-        title: 'Título do Post e mais alguma coisa para deixá-lo maior',
-        description:
-            'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ',
-        createdAt: new Date(),
-    },
-    {
-        id: '2',
-        title: 'Título do Post',
-        description:
-            'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ',
-        createdAt: new Date('12/31/2022'),
-    },
-    {
-        id: '3',
-        title: 'Título do Post e mais alguma coisa',
-        description:
-            'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ',
-        createdAt: new Date('01/01/2000'),
-    },
-];
+import { useContextSelector } from 'use-context-selector';
+import { PostsContext } from '../../../../../../../contexts/Posts';
+import { basicRemoveMarkDown } from '../../../../../../../utils';
 
 export const PostList: FC = () => {
-    const handleClickPost = (postId: string): void => {
-        alert('Abrindo post: ' + postId);
+    const posts = useContextSelector(PostsContext, (context) => context.posts);
+
+    const handleClickPost = (postNumber: number): void => {
+        alert('Abrindo post: ' + postNumber);
     };
 
     return (
         <PostListContainer>
-            {posts.map(({ id, title, description, createdAt }) => (
-                <Card key={id}>
-                    <PostCardContainer onClick={() => handleClickPost(id)}>
+            {posts.map(({ number, title, body, created_at }) => (
+                <Card key={number}>
+                    <PostCardContainer onClick={() => handleClickPost(number)}>
                         <PostCardHeader>
                             <Title size="md">{title}</Title>
 
                             <span>
-                                {formatDistanceToNow(new Date(createdAt), {
+                                {formatDistanceToNow(new Date(created_at), {
                                     addSuffix: true,
                                     locale: ptBR,
                                 })}
@@ -52,7 +33,7 @@ export const PostList: FC = () => {
                         </PostCardHeader>
 
                         <PostCardDescription>
-                            <Text size="md">{description}</Text>
+                            <Text size="md">{basicRemoveMarkDown(body)}</Text>
                         </PostCardDescription>
                     </PostCardContainer>
                 </Card>

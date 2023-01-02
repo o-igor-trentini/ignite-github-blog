@@ -9,3 +9,9 @@ export const debounce = <T>(action: (e: T) => void, time = 500): ((e: T) => void
         }, time);
     };
 };
+
+export const basicRemoveMarkDown = (text: string): string => {
+    if (text !== undefined && text != '') return text.replace(/[#_*]/g, '');
+
+    return '';
+};
