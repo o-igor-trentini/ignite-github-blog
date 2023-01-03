@@ -8,24 +8,25 @@ import { Text } from '../../../../../../ui/Text';
 import { useContextSelector } from 'use-context-selector';
 import { PostsContext } from '../../../../../../../contexts/Posts';
 import { basicRemoveMarkDown } from '../../../../../../../utils';
+import { useNavigate } from 'react-router-dom';
 
 export const PostList: FC = () => {
     const posts = useContextSelector(PostsContext, (context) => context.posts);
+    const baseUrl = import.meta.env.BASE_URL;
+    const navigate = useNavigate();
 
-    const handleClickPost = (postNumber: number): void => {
-        alert('Abrindo post: ' + postNumber);
-    };
+    const handleClickPost = (postNumber: number): void => navigate(baseUrl + 'post/' + postNumber);
 
     return (
         <PostListContainer>
-            {posts.map(({ number, title, body, created_at }) => (
+            {posts.map(({ number, title, body, updated_at }) => (
                 <Card key={number}>
                     <PostCardContainer onClick={() => handleClickPost(number)}>
                         <PostCardHeader>
                             <Title size="md">{title}</Title>
 
                             <span>
-                                {formatDistanceToNow(new Date(created_at), {
+                                {formatDistanceToNow(new Date(updated_at), {
                                     addSuffix: true,
                                     locale: ptBR,
                                 })}

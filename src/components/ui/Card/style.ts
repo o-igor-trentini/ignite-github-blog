@@ -10,7 +10,7 @@ interface CardContainerProps {
 
 export const CardContainer = styled.div<CardContainerProps>`
     width: 100%;
-    padding: 1.25rem 1rem;
+    padding: ${({ variant }) => (variant === 'profile' ? '2rem' : '1.25rem 1rem')};
 
     border: 1px solid ${({ theme }) => theme.basePost};
     border-radius: 10px;
