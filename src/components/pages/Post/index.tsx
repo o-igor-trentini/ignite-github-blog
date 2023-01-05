@@ -4,7 +4,6 @@ import { PostContainer } from './style';
 import { PostHeaderCard } from './components/Header';
 import { Issue } from '../../../service/issues/type';
 import { getIssue } from '../../../service/issues/api';
-import { CircleNotch } from 'phosphor-react';
 import { Content } from './components/Content';
 
 export const Post: FC = () => {
@@ -18,7 +17,7 @@ export const Post: FC = () => {
 
     if (isNaN(Number(number))) return <Navigate to={baseUrl} />;
 
-    if (post === null) return <CircleNotch size={32} weight="bold" />;
+    if (post === null) return <></>;
 
     return (
         <PostContainer>
