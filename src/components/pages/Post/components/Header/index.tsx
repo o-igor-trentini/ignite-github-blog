@@ -12,6 +12,7 @@ import { ArrowSquareUpRight, CalendarBlank, CaretLeft, ChatCircle, GithubLogo } 
 import { Title } from '../../../../ui/Title';
 import { Text } from '../../../../ui/Text';
 import { formatDistanceToNow } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 import ptBR from 'date-fns/locale/pt-BR';
 
 interface PostHeaderProps {
@@ -23,6 +24,11 @@ interface PostHeaderProps {
 }
 
 export const PostHeaderCard: FC<PostHeaderProps> = ({ title, author, commentsCount, updatedAt, postUrl }) => {
+    const navigate = useNavigate();
+    const baseUrl = import.meta.env.BASE_URL;
+
+    const handleBack = (): void => navigate(baseUrl);
+
     const handleLinkClick = (): void => {
         window.open(postUrl);
     };
@@ -31,7 +37,7 @@ export const PostHeaderCard: FC<PostHeaderProps> = ({ title, author, commentsCou
         <Card variant="profile" showShadow hover={false}>
             <HeaderCardContainer>
                 <HeaderCardHeader>
-                    <Button icon={{ element: <CaretLeft weight="bold" />, addon: 'before' }} onClick={handleLinkClick}>
+                    <Button icon={{ element: <CaretLeft weight="bold" />, addon: 'before' }} onClick={handleBack}>
                         Voltar
                     </Button>
 

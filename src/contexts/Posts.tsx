@@ -24,7 +24,7 @@ export const PostsProvider: FC<PostsProviderProps> = ({ children }) => {
 
     useEffect(() => {
         getPosts().then();
-    }, []);
+    }, [getPosts]);
 
     return (
         <PostsContext.Provider value={{ posts: posts.items, totalCount: posts.total_count, getPosts }}>
