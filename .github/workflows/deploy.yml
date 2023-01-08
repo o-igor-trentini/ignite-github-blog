@@ -22,7 +22,7 @@ jobs:
         run: npm ci
 
       - name: Create environment file
-        run: echo -e "VITE_GITHUB_API_TOKEN=GITHUB_API_TOKEN" > .env.production
+        run: echo -e "VITE_GITHUB_API_TOKEN=$GITHUB_API_TOKEN" > .env.production
         env:
           GITHUB_API_TOKEN: ${{ secrets.VITE_GITHUB_API_TOKEN }}
 
