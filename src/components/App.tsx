@@ -7,6 +7,8 @@ import { Router } from './Router';
 import { PostsProvider } from '../contexts/Posts';
 
 export const App: FC = () => {
+    console.log('### env', import.meta.env.VITE_GITHUB_API_TOKEN);
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <MainStyle />
