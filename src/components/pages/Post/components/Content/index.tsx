@@ -12,7 +12,10 @@ interface ContentProps {
 export const Content: FC<ContentProps> = ({ body }) => {
     const CodeRenderer = (props: any) => {
         return (
-            <SyntaxHighlighter language={props.className ? props.className.split('-')[1] : ''} style={atomDark}>
+            <SyntaxHighlighter
+                language={props.className && props.className.split('-')[1] ? props.className.split('-')[1] : ''}
+                style={atomDark}
+            >
                 {props.children}
             </SyntaxHighlighter>
         );

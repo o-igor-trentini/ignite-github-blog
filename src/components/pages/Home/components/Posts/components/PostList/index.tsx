@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { PostCardContainer, PostCardDescription, PostCardHeader, PostListContainer } from './style';
 import { Card } from '../../../../../../ui/Card';
 import { Title } from '../../../../../../ui/Title';
@@ -10,7 +10,7 @@ import { PostsContext } from '../../../../../../../contexts/Posts';
 import { basicRemoveMarkDown } from '../../../../../../../utils';
 import { useNavigate } from 'react-router-dom';
 
-export const PostList: FC = () => {
+const PostListComponent: FC = () => {
     const posts = useContextSelector(PostsContext, (context) => context.posts);
     const baseUrl = import.meta.env.BASE_URL;
     const navigate = useNavigate();
@@ -42,3 +42,5 @@ export const PostList: FC = () => {
         </PostListContainer>
     );
 };
+
+export const PostList = memo(PostListComponent);
