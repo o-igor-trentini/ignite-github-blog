@@ -2,7 +2,8 @@ import { AxiosResponse } from 'axios';
 import { api } from '../../lib/axios';
 import { Issue, TotalIssues } from './type';
 
-const auth = 'Bearer ' + import.meta.env.VITE_GITHUB_API_TOKEN;
+const token = import.meta.env.VITE_GITHUB_API_TOKEN;
+const auth = token ? 'Bearer ' + token : undefined;
 
 export const getIssues = async (search?: string): Promise<TotalIssues> => {
     const { data }: AxiosResponse<TotalIssues> = await api.get(
